@@ -6,11 +6,11 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2,:twitter]
   has_many :cart_items
 
-  after_create :send_admin_mail
+  # after_create :send_admin_mail
 
-  def send_admin_mail
-    UserMailer.welcome_email(self).deliver
-  end
+  # def send_admin_mail
+  #   UserMailer.welcome_email(self).deliver
+  # end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
