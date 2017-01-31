@@ -1,0 +1,132 @@
+<% if current_user.cart_items.present? %>
+  <div id="notice">
+  </div>
+  <section id="cart_items">
+    <div class="container">
+      <div class="cart_info">
+        <table class="table table-condensed">
+          <thead>
+            <tr class="cart_menu">
+              <td class="image">Item</td>
+              <td class="description"></td>
+              <td class="price">Price</td>
+              <td class="quantity">Quantity</td>
+              <td class="total">Total</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+          <% @cart_total=0 %>
+          <% @cart_items.each do |cart_item| %>
+            <tr id="cart-item-delete-<%= cart_item.id %>">
+              <td class="cart_product">
+                <%= image_tag(cart_item.product.pictures.first.avatar.url,class: 'cart-image') %>
+              </td>
+              <td class="cart_description">
+                <h4><%= cart_item.product.name %></h4>
+              </td>
+              <td class="cart_price">
+                <p>&#8377; <%= cart_item.product.price %></p>
+              </td>
+              <td class="cart_quantity">
+                <div class="cart_quantity_button">
+                  <% product_quantity = cart_item.product.quantity>0 ? "" : "disabled" %>
+                  <% cart_quantity = cart_item.quantity>1 ? "" : "disabled" %>
+                  <%= link_to '+',cart_item_path(cart_item,quantity_update: "plus",product_id: cart_item.product_id), method: :put, class: "cart_quantity_up btn", remote: true %>
+                  <%= number_field_tag :quantity, "#{cart_item.quantity}", min: 1, max: (cart_item.quantity+cart_item.product.quantity), product_id: cart_item.product_id, class: 'cart_quantity_input', id: "quantity-update-#{cart_item.id}", remote: true %>
+                  <%= link_to '-', cart_item_path(cart_item,quantity_update: "minus",product_id: cart_item.product_id), method: :put, class: "cart_quantity_down btn", remote: true %>
+                </div>
+              </td>
+              <td class="cart_total">
+                <% total=cart_item.product.price*cart_item.quantity %>
+                <p class="cart_total_price" id="cart-total-<%= cart_item.id %>">&#8377; <%= total %></p>
+              </td>
+              <td class="cart_delete">
+                <%= link_to cart_item, method: :delete, data: { confirm: 'Remove product from cart?', remote: true } do %><i class="fa fa-times"></i><% end %>
+              </td>
+              <% @cart_total += total%>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section> <!--/#cart_items-->
+  <section id="do_action">
+    <div class="container">
+      <div class="heading">
+        <h3>What would you like to do next?</h3>
+        <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="chose_area">
+            <ul class="user_option">
+              <li>
+                <input type="checkbox">
+                <label>Use Coupon Code</label>
+              </li>
+              <li>
+                <input type="checkbox">
+                <label>Use Gift Voucher</label>
+              </li>
+              <li>
+                <input type="checkbox">
+                <label>Estimate Shipping & Taxes</label>
+              </li>
+            </ul>
+            <ul class="user_info">
+              <li class="single_field">
+                <label>Country:</label>
+                <select>
+                  <option>United States</option>
+                  <option>Bangladesh</option>
+                  <option>UK</option>
+                  <option>India</option>
+                  <option>Pakistan</option>
+                  <option>Ucrane</option>
+                  <option>Canada</option>
+                  <option>Dubai</option>
+                </select>
+                
+              </li>
+              <li class="single_field">
+                <label>Region / State:</label>
+                <select>
+                  <option>Select</option>
+                  <option>Dhaka</option>
+                  <option>London</option>
+                  <option>Dillih</option>
+                  <option>Lahore</option>
+                  <option>Alaska</option>
+                  <option>Canada</option>
+                  <option>Dubai</option>
+                </select>
+              
+              </li>
+              <li class="single_field zip-field">
+                <label>Zip Code:</label>
+                <input type="text">
+              </li>
+            </ul>
+            <a class="btn btn-default update" href="">Get Quotes</a>
+            <a class="btn btn-default check_out" href="">Continue</a>
+          </div>
+        </div>
+        <div class="col-sm-6" id="cart-sub-total">
+          <%= render 'cart_total' %>
+        </div>
+      </div>
+    </div>
+  </section><!--/#do_action-->
+<% else %>
+  <section id="cart_items">
+    <div class="container">
+      <div class="cart_info">
+        <h2 style="text-align: center;">Your Shopping Bag is Empty</h2>
+        <br>
+        <h4 style="text-align: center;">Add Product to your cart</h4>
+      </div>
+    </div>
+  </section>
+<% end %>

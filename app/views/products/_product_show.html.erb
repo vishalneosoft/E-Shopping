@@ -1,0 +1,49 @@
+<div class="product-information"><!--/product-information-->
+  <%= image_tag "product-details/new.jpg", class: 'newarrival' %>
+  <h2><%= @product.name%></h2>
+  <p>Web ID: 1089772</p>
+  <% if user_signed_in? %>
+    <% if current_user.cart_items.pluck(:product_id).include?@product.id %>
+      <%= image_tag "product-details/rating.png" %>
+      <span>
+        <span>&#8377; <%= @product.price%></span>
+        <label>Quantity:</label>
+        <input type="text" disabled value="<%= current_user.cart_items.find_by(product_id: @product).quantity %>" />
+        <%= link_to cart_items_path,class: "btn btn-fefault cart" do %>
+          <i class="fa fa-shopping-cart"></i>
+          Go to cart
+        <% end %>
+      </span>
+    <% else %>
+      <%= form_for @cartitem,remote: true do |f| %>
+        <%= image_tag "product-details/rating.png" %>
+        <span>
+          <span>&#8377; <%= @product.price%></span>
+          <label>Quantity:</label>
+          <%= f.number_field :quantity, value: 1, min: 1, max: @product.quantity %>
+          <%= hidden_field_tag :product_id, @product.id %>
+          <%= hidden_field_tag :product_show, :true %>
+          <%= button_tag(:type => 'submit',class: 'btn cart') do%>
+            <i class="fa fa-shopping-cart"></i>
+            Add to cart
+          <% end %>
+        </span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= image_tag "product-details/rating.png" %>
+    <span>
+      <span>&#8377; <%= @product.price%></span>
+      <label>Quantity:</label>
+      <input type="text" value="1" />
+      <%= link_to cart_items_path,class: "btn btn-fefault cart" do %>
+        <i class="fa fa-shopping-cart"></i>
+        Add to cart
+      <% end %>
+    </span>
+  <% end %>
+  <p><b>Available Quantity:</b> <%= @product.quantity%></p>
+  <p><b>Condition:</b> New</p>
+  <p><b>Brand:</b> <%= @product.brand.name.upcase%></p>
+  <p><b>Share on:</b><%= social_share_button_tag(@product.name, :url => "http://www.myntra.com/men-tshirts?src=tNav#s:0") %></p>
+</div><!--/product-information-->

@@ -1,0 +1,22 @@
+<div class="productinfo text-center">
+  <%= image_tag(product.pictures.find_by(imageable_id: product.id).avatar.url) %>
+  <h2>&#8377; <%= product.price%></h2>
+  <%= link_to product_path(product) do %>
+    <p style="height: 70px"><%= product.name%></p>
+  <% end %>
+  <% if user_signed_in? %>
+    <% unless current_user.cart_items.pluck(:product_id).include?(product.id) %>
+      <%= link_to cart_items_path(product_id: product.id),method: :post, class: 'btn btn-default add-to-cart', remote: true do %>
+        <i class="fa fa-shopping-cart"> Add to cart</i>
+      <% end %>
+    <% else %>
+      <%= link_to cart_items_path(product_id: product.id),method: :post, class: 'btn btn-default add-one-cart', remote: true do %>
+        <i class="fa fa-shopping-cart"> Add One More</i>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to cart_items_path(product_id: product.id),method: :post, class: 'btn btn-default add-to-cart' do %>
+      <i class="fa fa-shopping-cart"> Add to cart</i>
+    <% end %>
+  <% end %>
+</div>

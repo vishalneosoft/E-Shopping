@@ -1,0 +1,4 @@
+$('#cart-item-delete-'+<%= @cart_item.id %>).remove()
+$('#index-cart').html("<%= j (render 'cart_items/index_cart') %>")
+$('#total-count').html('<i class=\'fa fa-shopping-cart\'></i> Cart (<%= @cart_items.count%>)')
+$('#cart-sub-total').html("<%= j (render 'cart_items/cart_total') %>")

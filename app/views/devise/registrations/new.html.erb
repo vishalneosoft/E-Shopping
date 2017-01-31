@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-2">
+      <div class="signup-form">
+        <h2>New User Signup!</h2>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="field">
+            <%= f.text_field :first_name,placeholder: 'First Name', autofocus: true %>
+          </div>
+          
+          <div class="field">
+            <%= f.text_field :last_name,placeholder: 'Last Name', autofocus: true %>
+          </div>
+
+          <div class="field">
+            <%= f.email_field :email,placeholder: 'Email Address', autofocus: true %>
+          </div>
+
+          <div class="field">
+            <%= f.password_field :password,placeholder: 'Password', autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.password_field :password_confirmation,placeholder: 'Repeat Password', autocomplete: "off" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Sign up", class: 'btn btn-width' %>
+          </div>
+        <% end %>
+
+        <%- if controller_name != 'sessions' %>
+          <%= link_to "Log in", new_session_path(resource_name) %><br />
+        <% end -%>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div style="margin-top: 40px;margin-left: 50px;border-left:1px solid grey;height:290px">
+        <span class="signup-seperator"><b>OR</b></span>
+        <div class="col-sm-12 signin-other">
+          <div class='signin-g'>
+            <%= link_to user_google_oauth2_omniauth_authorize_path,style: 'color: #fff' do %>
+              <span>Sign in with google</span>
+            <% end %>
+          </div>
+          <div class='signin-f'>
+            <%= link_to user_facebook_omniauth_authorize_path,style: 'color: #fff' do %>
+              <span>Sign in with facebook</span>
+            <% end %>
+          </div>
+          <div class='signin-t'>
+            <%= link_to user_twitter_omniauth_authorize_path,style: 'color: #fff' do %>
+              <span>Sign in with twitter</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+$('.single-products-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/product_increase', :locals => { product: @product }) %>");
+$('#single-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/category_product', :locals => { product: @product }) %>");
+$('#show-product-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'products/product_show') %>");
+$('#total-count').html('<i class=\'fa fa-shopping-cart\'></i> Cart (<%= @cart_items.count%>)')
