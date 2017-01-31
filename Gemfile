@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -36,7 +35,7 @@ gem 'carrierwave', '~> 1.0'
 gem "rmagick", "~> 2.13.1"
 gem 'awesome_print'
 # Use ActiveModel has_secure_password
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 # Use Unicorn as the app server
 # gem 'unicorn'
 
