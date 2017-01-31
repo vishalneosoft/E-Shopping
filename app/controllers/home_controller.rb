@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       @subcategories = @category.sub_categories
       @subcategory = @category.sub_categories.first
     end
-    if @subcategory.present
+    if @subcategory.present?
       @products = @subcategory.products
     end
     @brands = Brand.all
