@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     end
     if @subcategory.present
       @products = @subcategory.products
-      @brands = Brand.all
     end
+    @brands = Brand.all
   end
 end
