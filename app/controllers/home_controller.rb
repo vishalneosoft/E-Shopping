@@ -3,8 +3,10 @@ class HomeController < ApplicationController
     @banners = Banner.all
     @categories = Category.all.where(parent_id: nil)
     @category = Category.first
-    @subcategories = @category.sub_categories
-    @subcategory = @category.sub_categories.first
+    if @category.present?
+      @subcategories = @category.sub_categories
+      @subcategory = @category.sub_categories.first
+    end
     @products = @subcategory.products
     @brands = Brand.all
   end
