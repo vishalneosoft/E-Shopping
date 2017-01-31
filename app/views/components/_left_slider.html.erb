@@ -1,6 +1,7 @@
 <div class="left-sidebar">
   <h2>Category</h2>
   <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+  <% if @categories.present? %>
     <% @categories.each do |category| %>
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -15,7 +16,7 @@
             </a>
           </h4>
         </div>
-        <% if category.brands.present? %>
+        <% if category.brands.present? && @category.present? %>
           <div id="<%= category.id %>" class="<%= collapse_css(@category, category) %>">
             <div class="panel-body">
               <ul>
@@ -32,6 +33,7 @@
         <% end %>
       </div>
     <% end %>
+  <% end %>
   </div><!--/category-products-->
 
   <div class="brands_products"><!--brands_products-->
