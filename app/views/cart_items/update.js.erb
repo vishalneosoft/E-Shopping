@@ -1,3 +1,4 @@
 $('#quantity-update-'+<%= @cart_item.id %>).val(<%= @cart_item.quantity %>)
 $('#cart-total-'+<%= @cart_item.id %>).html("&#8377; "+<%= (@cart_item.quantity * @cart_item.product.price) %>.toFixed(1))
 $('#cart-sub-total').html("<%= j (render 'cart_items/cart_total') %>")
+$('#checkout-total').html("<%= j (render 'check_outs/checkout_shipping_total') %>")

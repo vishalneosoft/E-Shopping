@@ -1,13 +1,13 @@
 <div class="category-tab"><!--category-tab-->
   <div class="col-sm-12">
     <ul class="nav nav-tabs">
-    <% if @subcategories.present? && @subcategory.present? %>
+    <% if @subcategories.present? %>
       <% @subcategories.each_with_index do |subcategory,index| %>
         <li class="<%= "active" if @subcategory.id == subcategory.id %>">
           <%= link_to subcategory.name,category_path(@category,sub_category: subcategory.id) %>
         </li>
-      <% end %> 
-    <% end %>  
+      <% end %>  
+    <% end %> 
     </ul>
   </div>
   <% if @products.present? %>

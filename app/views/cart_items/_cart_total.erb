@@ -12,6 +12,5 @@
     </li>
     <li>Total <span>&#8377; <%= @cart_total+cart_tax+@shipping_cost %></span></li>
   </ul>
-    <a class="btn btn-default update" href="">Update</a>
-    <a class="btn btn-default check_out" href="">Check Out</a>
+    <%= link_to 'Checkout',check_outs_path,class: 'btn btn-default check_out' %>
 </div>

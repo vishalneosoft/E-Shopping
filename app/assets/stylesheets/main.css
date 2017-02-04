@@ -8,6 +8,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background:;
   position: relative;
   font-weight:400px;
 }
@@ -898,6 +899,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
+  opacity:;
 }
 
 .single-products:hover .product-overlay {
@@ -1794,7 +1796,7 @@ h2.title {
 }
 
 .check_out {
-  margin-left: 20px
+  margin-left: 40px
 }
 
 
@@ -1824,7 +1826,7 @@ h2.title {
 .checkout-options h3 {
   color: #363432;
   font-size: 20px;
-  margin-bottom: 0;
+  margin-bottom: 1;
   font-weight: normal;
   font-family: 'Roboto', sans-serif;
 }
@@ -1904,13 +1906,13 @@ h2.title {
 
 .form-two, .form-one {
   float: left;
-  width: 47%
 }
 
 
 .shopper-info > form > input, 
-.form-two > form > select, 
-.form-two > form > input, 
+.billing >  select,
+.form-one > form > select, 
+.billing >  input, 
 .form-one > form > input {
   background:#F0F0E9;
   border: 0 none;
@@ -2118,6 +2120,10 @@ h2.title {
 .pagination li .active {
   background:#FE980F;
   color: #fff
+}
+
+.address_para {
+  line-height: 10px;
 }
 
 

@@ -21,6 +21,36 @@
 //     }
 // }
 
+
+
+$(document).ready(function(){ 
+  $(document).on("click","#check-address",function() {
+    if($('#check-address').is(':checked'))
+    {
+      $('#name1').val($('#name').val());
+      $('#address-field1').val($('#address-field').val());
+      $('#address-field3').val($('#address-field2').val());
+      $('#pincode1').val($('#pincode').val());
+      $('#phone1').val($('#phone').val());
+      $('#city1').val($('#city').val());
+      $('#country1').val($('#country').val());
+      $('#state1').val($('#state').val());
+    } 
+    else 
+    { 
+      $('#name1').val("");
+      $('#address-field1').val("");
+      $('#address-field3').val("");
+      $('#pincode1').val("");
+      $('#phone1').val("");
+      $('#city1').val("");
+      $('#country1').val("");
+      $('#state1').val("");
+    };
+
+  });
+});
+
 $(document).ready(function(){
   $(document).on("change",".cart_quantity_input",function() {
     var value = parseInt($(this).val());

@@ -1,0 +1,145 @@
+<section id="cart_items">
+  <div class="container">
+
+    <div class="step-one">
+      <h2 class="heading">Step1 - User Detail</h2>
+    </div>
+    <div class="checkout-options">
+      <ul class="nav">
+        <li>
+          <label><b>LOGIN ID : </b></label>
+        </li>
+        <li>
+          <label><%= current_user.email %></label>
+        </li>
+        <li>
+          <label><b>NAME : </b></label>
+        </li>
+        <li>
+          <label><%= current_user.first_name %></label>
+        </li>
+      </ul>
+    </div><!--/checkout-options-->
+
+    <div class="step-one">
+      <h2 class="heading">Step2 - Address</h2>
+    </div><!--/register-req-->
+    <div class="shopper-informations">
+      <% if current_user.addresses.present? %>
+        <%= render 'check_outs/show_address' %>
+      <% else %>
+      <div class="row">
+        <div class="col-sm-12 clearfix">
+          <div class="bill-to">
+            <%= form_for @address do |f| %>
+              <div class="row">
+                <div class="col-sm-4 col-sm-offset-1 billing">
+                  <p>Billing Address</p>
+                  <%= f.text_field :name , placeholder: "Name",id: "name", name: "address[billing][name]" %>
+                  <%= f.text_field :address1 , placeholder: "Address 1 *", id: "address-field", name: "address[billing][address1]" %>
+                  <%= f.text_field :address2 , placeholder: "Address 2", id: "address-field2", name: "address[billing][address2]" %>
+                  <%= f.text_field :pincode , placeholder: "Zip / Postal Code *", id: "pincode", name: "address[billing][pincode]" %>
+                  <%= f.text_field :city , placeholder: "City *", id: "city", name: "address[billing][city]" %>
+                  <%= f.select(:country, ['United States', 'Bangladesh','UK','India','Pakistan','Ucrane','Canada','Dubai'], {include_blank: "-- Country --"}, id: "country", name: "address[billing][country]") %>
+                  <% @state = ["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Pondicherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Tripura","Uttaranchal","Uttar Pradesh","West Bengal"] %>
+                  <%= f.select(:state, @state, {include_blank: "-- State / Province / Region --"}, id: "state", name: "address[billing][state]") %>
+                  <%= f.text_field :phone , placeholder: "Phone *", id: "phone", name: "address[billing][phone]" %>
+                  <%= f.hidden_field :user_id, value: "#{current_user.id}", name: "address[billing][user_id]" %>
+                  <%= f.hidden_field :address_type, value: "billing", name: "address[billing][address_type]" %>
+                </div>
+                <div class="col-sm-4 col-sm-offset-2 billing">
+                  <p>Shipping Address</p>
+                  <%= f.text_field :name , placeholder: "Name", id: "name1", name: "address[shipping][name]" %>
+                  <%= f.text_field :address1 , placeholder: "Address 1 *", id: "address-field1", name: "address[shipping][address1]" %>
+                  <%= f.text_field :address2 , placeholder: "Address 2", id: "address-field3", name: "address[shipping][address2]" %>
+                  <%= f.text_field :pincode , placeholder: "Zip / Postal Code *", id: "pincode1", name: "address[shipping][pincode]" %>
+                  <%= f.text_field :city , placeholder: "City *", id: "city1", name: "address[shipping][city]" %>
+                  <%= f.select(:country, ['United States', 'Bangladesh','UK','India','Pakistan','Ucrane','Canada','Dubai'], {include_blank: "-- Country --"}, id: "country1", name: "address[shipping][country]") %>
+                  <%= f.select(:state, @state, {include_blank: "-- State / Province / Region --"}, id: "state1", name: "address[shipping][state]") %>
+                  <%= f.text_field :phone , placeholder: "Phone *", id: "phone1", name: "address[shipping][phone]" %>
+                  <span><%= check_box_tag 'check-address' %> Same as Billing Address</span>
+                  <%= f.hidden_field :user_id, value: "#{current_user.id}", name: "address[shipping][user_id]" %>
+                  <%= f.hidden_field :address_type, value: "shipping", name: "address[shipping][address_type]" %>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-offset-5">
+          <%= f.submit "Save", class: 'btn btn-width' %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="review-payment">
+      <h2>Review & Payment</h2>
+    </div>
+
+    <div class="cart_info">
+      <table class="table table-condensed">
+        <thead>
+          <tr class="cart_menu">
+            <td class="image">Item</td>
+            <td class="description"></td>
+            <td class="price">Price</td>
+            <td class="quantity">Quantity</td>
+            <td class="total">Total</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+        <% @cart_total=0 %>
+        <% @cart_items.each do |cart_item| %>  
+          <tr id="cart-item-delete-<%= cart_item.id %>">
+            <td class="cart_product">
+              <%= image_tag(cart_item.product.pictures.first.avatar.url,class: 'cart-image') %>
+            </td>
+            <td class="cart_description">
+              <h4><%= cart_item.product.name %></h4>
+            </td>
+            <td class="cart_price">
+              <p>&#8377; <%= cart_item.product.price %></p>
+            </td>
+            <td class="cart_quantity">
+              <div class="cart_quantity_button">
+                <% product_quantity = cart_item.product.quantity>0 ? "" : "disabled" %>
+                <% cart_quantity = cart_item.quantity>1 ? "" : "disabled" %>
+                <%= link_to '+',cart_item_path(cart_item,quantity_update: "plus",product_id: cart_item.product_id), method: :put, class: "cart_quantity_up btn", remote: true %>
+                <%= number_field_tag :quantity, "#{cart_item.quantity}", min: 1, max: cart_item.product.quantity, product_id: cart_item.product_id, class: 'cart_quantity_input', id: "quantity-update-#{cart_item.id}", remote: true %>
+                <%= link_to '-', cart_item_path(cart_item,quantity_update: "minus",product_id: cart_item.product_id), method: :put, class: "cart_quantity_down btn", remote: true %>
+              </div>
+            </td>
+            <td class="cart_total">
+              <% total=cart_item.product.price*cart_item.quantity %>
+              <p class="cart_total_price" id="cart-total-<%= cart_item.id %>">&#8377; <%= total %></p>
+            </td>
+            <td class="cart_delete">
+              <%= link_to cart_item, method: :delete, data: { confirm: 'Remove product from cart?', remote: true } do %><i class="fa fa-times"></i><% end %>
+            </td>
+          </tr>
+          <% @cart_total += total%>
+        <% end %>
+          <tr>
+            <td colspan="4">&nbsp;</td>
+            <td colspan="2">
+              <table class="table table-condensed total-result" id="checkout-total">
+                <%= render 'checkout_shipping_total' %>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="payment-options">
+      <!-- <span>
+        <label><input type="checkbox"> Direct Bank Transfer</label>
+      </span>
+      <span>
+        <label><input type="checkbox"> Check Payment</label>
+      </span>
+      <span>
+        <label><input type="checkbox"> Paypal</label>
+      </span> -->
+    </div>
+  </div>
+</section> <!--/#cart_items-->

@@ -1,0 +1,33 @@
+<% @addresses = current_user.addresses %>
+<div class="col-sm-12 col-sm-offset-2">
+  <% @addresses.each do |address| %>
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <% if address.address_type == "billing" %>
+          <h4>Billing-Address</h4>
+        <% else %>
+          <h4>Shipping-Address</h4>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <p style="font-size: 20px"><%= address.name %></p>
+        <hr>
+        <p class="address_para"><%= address.address1 %></p>
+        <p class="address_para"><%= address.address2 %></p>
+        <p class="address_para"><%= address.pincode %></p>
+        <p class="address_para"><%= address.city %></p>
+        <p class="address_para"><%= address.state %></p>
+        <p class="address_para"><%= address.country %></p>
+        <hr>
+        <p class="address_para"><%= address.phone %></p>
+        <hr>
+        <%= link_to edit_address_path(address),style: "color: black" do %>
+          <i class="fa fa-pencil-square-o"></i>
+          <span>EDIT</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

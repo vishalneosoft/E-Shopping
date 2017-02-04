@@ -1,0 +1,40 @@
+<% @addresss = Address.all %>
+<% @addresses = current_user.addresses.first%>
+
+<div class="col-sm-12 col-sm-offset-2">
+  <% @addresss.each do |address| %>
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <% if address.address_type == "billing" %>
+          <h4>Billing-Address</h4>
+        <% else %>
+          <h4>Shipping-Address</h4>
+        <% end %>
+      </div>
+      <div class="panel-body">
+       
+        <p style="font-size: 20px"><%= address.name %></p>
+        
+        <hr>
+        <p style="line-height: 10px"><%= address.address1 %></p>
+        <p style="line-height: 10px"><%= address.address2 %></p>
+        <p style="line-height: 10px"><%= address.pincode %></p>
+        <p style="line-height: 10px"><%= address.city %></p>
+        <p style="line-height: 10px"><%= address.state %></p>
+        <p style="line-height: 10px"><%= address.country %></p>
+        <hr>
+        <p style="line-height: 10px"><%= address.phone %></p>
+        <hr>
+        <%= link_to addresses_path,style: "color: black" do %>
+          <i class="fa fa-pencil-square-o"></i>
+          <span>EDIT</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= link_to 'Edit', edit_address_path(@address) %> |
+<%= link_to 'Back', addresses_path %>
+<hr>
