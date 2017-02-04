@@ -41,7 +41,6 @@ gem 'country_state_select', '3.0.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
 gem 'sqlite3', group: :development
 gem 'pg', '0.18.1', group: :production
 gem 'rails_12factor', group: :production
