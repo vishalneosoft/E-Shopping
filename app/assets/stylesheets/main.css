@@ -2275,7 +2275,7 @@ h2.title {
 
 .blog-socials ul li a:hover {
   color: #fff;
-  background:#FE980F;
+  background:#FE980F
 }
 
 
@@ -2422,6 +2422,49 @@ h2.title {
 }
 
 .btn.btn-width:hover {
+  color: #000;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+
+.btn.btn-width1 {
+  background:#FE980F;
+  border: 0 none;
+  border-radius: 0;
+  margin-top: 16px;
+  width: 41%;
+  color: white;
+}
+
+.btn.btn-width1:hover {
+  color: #000;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+
+.btn.btn-width2 {
+  background:#FE980F;
+  color: white;
+}
+
+.btn.btn-width2:hover {
+  color: #000;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+
+.btn.btn-width3 {
+  background:#FE980F;
+  border: 0 none;
+  border-radius: 0;
+  margin-top: 6px;
+  width: 30%;
+  height: 40px;
+  color: white;
+}
+
+
+.btn.btn-width3:hover {
   color: #000;
   background-color: #ebebeb;
   border-color: #adadad;
@@ -2607,4 +2650,12 @@ h2.title {
 .cart-image {
   height: 140px;
   width: 130px;
+}
+
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+
+.table > thead > tr > .no-line {
+    border-bottom: none;
 }

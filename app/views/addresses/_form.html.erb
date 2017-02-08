@@ -1,49 +1,21 @@
-<%= form_for(@address) do |f| %>
-  <% if @address.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h2>
-
-      <ul>
-      <% @address.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="bill-to">
+  <%= form_for @address do |f| %>
+    <div class="row">
+      <div class="col-sm-12 billing">
+        <p>Add New Address</p>
+        <%= f.text_field :name , placeholder: "Name",id: "name" %>
+        <%= f.text_field :address1 , placeholder: "Address 1 *", id: "address-field" %>
+        <%= f.text_field :address2 , placeholder: "Address 2" %>
+        <%= f.text_field :pincode , placeholder: "Zip / Postal Code *", id: "pincode" %>
+        <%= f.text_field :city , placeholder: "City *", id: "city" %>
+        <%= f.select(:country, ['United States', 'Bangladesh','UK','India','Pakistan','Ucrane','Canada','Dubai'], {include_blank: "-- Country --"}, id: "country") %>
+        <% @state = ["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Pondicherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Tripura","Uttaranchal","Uttar Pradesh","West Bengal"] %>
+        <%= f.select(:state, @state, {include_blank: "-- State / Province / Region --"}, id: "state") %>
+        <%= f.text_field :phone , placeholder: "Phone *", id: "phone" %>
+        <%= f.hidden_field :user_id, value: "#{current_user.id}" %>
+        <%= f.submit "Save", class: 'btn btn-width' %>
+        <button type="button" class="btn btn-width3" data-dismiss="modal">Cancel</button>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :address1 %><br>
-    <%= f.text_field :address1 %>
-  </div>
-  <div class="field">
-    <%= f.label :address2 %><br>
-    <%= f.text_field :address2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :country %><br>
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :pincode %><br>
-    <%= f.number_field :pincode %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.number_field :phone %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

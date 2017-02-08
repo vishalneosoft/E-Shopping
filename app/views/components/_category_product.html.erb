@@ -1,7 +1,7 @@
 <div class="productinfo text-center">
-  <%= image_tag(product.pictures.find_by(imageable_id: product.id).avatar.url) %>
-  <h2>&#8377; <%= product.price%></h2>
   <%= link_to product_path(product) do %>
+    <%= image_tag(product.pictures.find_by(imageable_id: product.id).avatar.url) %>
+    <h2>&#8377; <%= product.price%></h2>
     <p style="height: 70px"><%= product.name%></p>
   <% end %>
   <% if user_signed_in? %>

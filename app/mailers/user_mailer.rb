@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    @url  = 'http://localhost:3000/users/sign_in'
+    @url  = 'https://vishal-eshopper.herokuapp.com/users/sign_in'
     attachments.inline['logo.png'] = File.read('/home/webwerks1/Desktop/Training/Rails/EShopping/app/assets/images/home/logo.png')
     email_with_name = %("#{@user.first_name}" <#{@user.email}>)
     mail(to: email_with_name,subject: 'Welcome to Eshopper')

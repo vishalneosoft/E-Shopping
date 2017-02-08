@@ -1,11 +1,21 @@
 Rails.application.routes.draw do
+  resources :order_items
   resources :addresses
   resources :check_outs
+  get 'review_payment', to: 'check_outs#review_payment'
   resources :cart_items
   resources :categories do 
     resources :brands
   end
+  resources :brands
   resources :products
+  resources :orders do 
+    member do
+      get 'payment'
+      post 'create_charges'
+      get 'cancel_order'
+    end
+  end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get 'home/index'

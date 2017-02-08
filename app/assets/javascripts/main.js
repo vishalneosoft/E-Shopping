@@ -21,7 +21,11 @@
 //     }
 // }
 
-
+$(document).ready(function(){ 
+  $(document).on("click","#form-close",function() {
+    $("new_address").slideUp();
+  });
+});
 
 $(document).ready(function(){ 
   $(document).on("click","#check-address",function() {

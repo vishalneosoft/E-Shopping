@@ -1,7 +1,6 @@
 <div class="category-tab"><!--category-tab-->
   <div class="col-sm-12">
     <ul class="nav nav-tabs">
-    <% if @category.present? %>
     <% if @subcategories.present? %>
       <% @subcategories.each_with_index do |subcategory,index| %>
         <li class="<%= "active" if @subcategory.id == subcategory.id %>">
@@ -9,7 +8,6 @@
         </li>
       <% end %>  
     <% end %> 
-    <% end %>
     </ul>
   </div>
   <% if @products.present? %>

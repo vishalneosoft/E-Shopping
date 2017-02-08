@@ -48,8 +48,6 @@ class CartItemsController < ApplicationController
       end
       respond_to do |format|
         if @cart_item.save
-          @product.quantity -= quantity 
-          @product.save
           @cart_items = current_user.cart_items
           format.html { redirect_to :back, notice: 'Item added to cart successfully' }
           format.json { render :show, status: :created, location: @cart_item }
@@ -72,24 +70,19 @@ class CartItemsController < ApplicationController
     @cart_item = CartItem.find(params[:id])
     if params[:quantity_update] == "plus" && @product.quantity > 0
       @cart_item.quantity +=1
-      @product.quantity -=1
     elsif params[:quantity_update] == "minus" && @cart_item.quantity > 1
       @cart_item.quantity -=1
-      @product.quantity +=1
     elsif params[:quantity].present?
       if params[:quantity].to_i > @cart_item.quantity
         product_quantity = params[:quantity].to_i - @cart_item.quantity
         @cart_item.quantity = params[:quantity].to_i
-        @product.quantity -= product_quantity
       elsif params[:quantity].to_i < @cart_item.quantity
         product_quantity = @cart_item.quantity - params[:quantity].to_i
         @cart_item.quantity = params[:quantity].to_i
-        @product.quantity += product_quantity
       end
     end
     respond_to do |format|
       if @cart_item.save
-        @product.save
         current_user.cart_items.each do |item|
           @cart_total += item.quantity * item.product.price
         end
@@ -113,9 +106,6 @@ class CartItemsController < ApplicationController
   # DELETE /cart_items/1
   # DELETE /cart_items/1.json
   def destroy
-    @product = Product.find(@cart_item.product_id)
-    @product.quantity += @cart_item.quantity
-    @product.save
     @cart_item.destroy
     @cart_items = current_user.cart_items.all
     @cart_total = 0
@@ -128,7 +118,7 @@ class CartItemsController < ApplicationController
       @shipping_cost = 0.to_f
     end
     respond_to do |format|
-      format.html { redirect_to cart_items_url, notice: 'Item was successfully removed!' }
+      format.html { redirect_to :back, notice: 'Item was successfully removed!' }
       format.json { head :no_content }
       format.js
     end

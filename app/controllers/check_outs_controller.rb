@@ -16,6 +16,7 @@ class CheckOutsController < ApplicationController
     else
       @shipping_cost = 0.to_f
     end
+    @addresses = current_user.addresses
     @address = Address.new
   end
 
@@ -70,6 +71,19 @@ class CheckOutsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to check_outs_url, notice: 'Check out was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def review_payment
+    @cart_items = current_user.cart_items
+    @cart_total = 0
+    @cart_items.each do |item|
+      @cart_total += item.quantity * item.product.price
+    end
+    if @cart_total > 5000
+      @shipping_cost = 100.to_f
+    else
+      @shipping_cost = 0.to_f
     end
   end
 

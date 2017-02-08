@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Thank-You</h2>
+    <p>Your Order with order-id: <%= @order.id %> is <b
+    >Complete</b>, you paid <b>&#8377; <%= @order.grand_total %></b></p>
+    <%= image_tag attachments['logo.png'].url %>
+    <h3>Your delivery Address is:</h3>
+    <hr>
+    <p style="font-size: 20px"><%= @address.name %></p>
+    <p class="address_para"><%= @address.address1 %></p>
+    <p class="address_para"><%= @address.address2 %></p>
+    <p class="address_para"><%= @address.pincode %></p>
+    <p class="address_para"><%= @address.city %></p>
+    <p class="address_para"><%= @address.state %></p>
+    <p class="address_para"><%= @address.country %></p>
+    <p><%= @address.phone %></p>
+  </body>
+</html>

@@ -4,7 +4,10 @@ class BrandsController < ApplicationController
   # GET /brands
   # GET /brands.json
   def index
+    @categories = Category.all.where(parent_id: nil)
+    @category = Category.first
     @brands = Brand.all
+    @brand = Brand.find(params[:id])
   end
 
   # GET /brands/1

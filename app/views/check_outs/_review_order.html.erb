@@ -1,0 +1,80 @@
+<% if current_user.cart_items.present? %>
+  <section id="cart_items">
+    <div class="container">
+      <div class="step-one">
+        <h2 class="heading">Step3 - Review & Payment</h2>
+      </div>
+
+      <div class="cart_info">
+        <table class="table table-condensed">
+          <thead>
+            <tr class="cart_menu">
+              <td class="image">Item</td>
+              <td class="description"></td>
+              <td class="price">Price</td>
+              <td class="quantity">Quantity</td>
+              <td class="total">Total</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+          <% @cart_total=0 %>
+          <% @cart_items.each do |cart_item| %>  
+            <tr id="cart-item-delete-<%= cart_item.id %>">
+              <td class="cart_product">
+                <%= image_tag(cart_item.product.pictures.first.avatar.url,class: 'cart-image') %>
+              </td>
+              <td class="cart_description">
+                <h4><%= cart_item.product.name %></h4>
+              </td>
+              <td class="cart_price">
+                <p>&#8377; <%= cart_item.product.price %></p>
+              </td>
+              <td class="cart_quantity">
+                <div class="cart_quantity_button">
+                  <% product_quantity = cart_item.product.quantity>0 ? "" : "disabled" %>
+                  <% cart_quantity = cart_item.quantity>1 ? "" : "disabled" %>
+                  <%= link_to '+',cart_item_path(cart_item,quantity_update: "plus",product_id: cart_item.product_id), method: :put, class: "cart_quantity_up btn", remote: true %>
+                  <%= number_field_tag :quantity, "#{cart_item.quantity}", min: 1, max: cart_item.product.quantity, product_id: cart_item.product_id, class: 'cart_quantity_input', id: "quantity-update-#{cart_item.id}", remote: true %>
+                  <%= link_to '-', cart_item_path(cart_item,quantity_update: "minus",product_id: cart_item.product_id), method: :put, class: "cart_quantity_down btn", remote: true %>
+                </div>
+              </td>
+              <td class="cart_total">
+                <% total=cart_item.product.price*cart_item.quantity %>
+                <p class="cart_total_price" id="cart-total-<%= cart_item.id %>">&#8377; <%= total %></p>
+              </td>
+              <td class="cart_delete">
+                <%= link_to cart_item, method: :delete, data: { confirm: 'Remove product from cart?', remote: true } do %><i class="fa fa-times"></i><% end %>
+              </td>
+            </tr>
+            <% @cart_total += total%>
+          <% end %>
+            <tr>
+              <td colspan="4">&nbsp;</td>
+              <td colspan="2">
+                <table class="table table-condensed total-result" id="checkout-total">
+                  <%= render 'check_outs/checkout_shipping_total' %>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-offset-5">
+      <%= link_to 'Continue To Pay', orders_path(address_id: params[:address_id]), method: :post, class: 'btn btn-width2' %>
+    </div>
+  </section> <!--/#cart_items-->
+<% else %>
+  <section id="cart_items">
+    <div class="container">
+      <div class="cart_info">
+        <h2 style="text-align: center;">Your Shopping Bag is Empty</h2>
+        <br>
+        <h4 style="text-align: center;">Add Product to your cart</h4>
+        <br>
+        <h4 style="text-align: center;"><%= link_to 'Continue Shopping', root_path, class: 'btn btn-width2' %></h4>
+      </div>
+    </div>
+  </section>
+<% end %>
