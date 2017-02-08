@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :order_items, dependent: :destroy
 
-  # after_create :send_admin_mail
+  after_create :send_admin_mail
 
-  # def send_admin_mail
-  #   UserMailer.welcome_email(self).deliver
-  # end
+  def send_admin_mail
+    UserMailer.welcome_email(self).deliver
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
