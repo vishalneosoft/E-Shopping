@@ -107,7 +107,7 @@ class CartItemsController < ApplicationController
   # DELETE /cart_items/1.json
   def destroy
     @cart_item.destroy
-    @cart_items = current_user.cart_items.all
+    @cart_items = current_user.cart_items
     @cart_total = 0
     @cart_items.each do |item|
       @cart_total += item.quantity * item.product.price
