@@ -23,7 +23,7 @@ class BrandsController < ApplicationController
     @sub = if(params[:sub_category])
             @brand.categories.find(params[:sub_category])
           else @subcategory.present?
-            @subcategory.last
+            @subcategory.first
           end
   end
 
