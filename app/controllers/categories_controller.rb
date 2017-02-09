@@ -19,7 +19,9 @@ class CategoriesController < ApplicationController
                   else @category.sub_categories.present?
                     @category.sub_categories.first
                   end
-    @products = @subcategory.products                  
+    if @subcategory.present?
+      @products = @subcategory.products
+    end
   end
 
   # GET /categories/new
