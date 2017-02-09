@@ -1,33 +1,35 @@
 <div id="edit_address">
   <div class="col-sm-12">
     <% @addresses.each do |address| %>
-    <div class="col-sm-4">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <p style="font-size: 20px"><%= address.name %></p>
-          <hr>
-          <p class="address_para"><%= address.address1 %></p>
-          <p class="address_para"><%= address.address2 %></p>
-          <p class="address_para"><%= address.pincode %></p>
-          <p class="address_para"><%= address.city %></p>
-          <p class="address_para"><%= address.state %></p>
-          <p class="address_para"><%= address.country %></p>
-          <hr>
-          <p class="address_para"><%= address.phone %></p>
-          <hr>
-          <%= link_to 'Deliver to this Address', review_payment_path(address_id: address.id), class: 'btn btn-width2', style: 'margin-left: 60px' %>
-          <hr>
-          <%= link_to edit_address_path(address), remote: true, style: "color: black" do %>
-            <i class="fa fa-pencil-square-o"></i>
-            <span>EDIT</span>
-          <% end %>
-          <%= link_to address_path(address), method: :delete, style: "color: black;margin-left: 180px" do %>
-            <i class="fa fa-trash-o"></i>
-            <span>DELETE</span>
-          <% end %>
+    <% if address.status == '' %>
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p style="font-size: 20px"><%= address.name %></p>
+            <hr>
+            <p class="address_para"><%= address.address1 %></p>
+            <p class="address_para"><%= address.address2 %></p>
+            <p class="address_para"><%= address.pincode %></p>
+            <p class="address_para"><%= address.city %></p>
+            <p class="address_para"><%= address.state %></p>
+            <p class="address_para"><%= address.country %></p>
+            <hr>
+            <p class="address_para"><%= address.phone %></p>
+            <hr>
+            <%= link_to 'Deliver to this Address', review_payment_path(address_id: address.id), class: 'btn btn-width2', style: 'margin-left: 60px' %>
+            <hr>
+            <%= link_to edit_address_path(address), remote: true, style: "color: black" do %>
+              <i class="fa fa-pencil-square-o"></i>
+              <span>EDIT</span>
+            <% end %>
+            <%= link_to address_path(address), method: :put, style: "color: black;margin-left: 180px" do %>
+              <i class="fa fa-trash-o"></i>
+              <span>DELETE</span>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
     <% end %>
   </div>
   <div id="new_address" style="margin-left: 30px">
