@@ -16,7 +16,6 @@
             </tr>
           </thead>
           <tbody>
-          <% @cart_total=0 %>
           <% @cart_items.each do |cart_item| %>
             <tr id="cart-item-delete-<%= cart_item.id %>">
               <td class="cart_product">
@@ -44,7 +43,6 @@
               <td class="cart_delete">
                 <%= link_to cart_item, method: :delete, data: { confirm: 'Remove product from cart?', remote: true } do %><i class="fa fa-times"></i><% end %>
               </td>
-              <% @cart_total += total%>
             </tr>
           <% end %>
           </tbody>
