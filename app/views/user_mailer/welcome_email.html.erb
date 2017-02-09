@@ -10,7 +10,8 @@
       your email is: <%= @user.email %>.<br>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      To login to the site, just follow this link: 
+      <%= link_to (@url) do %>E-Shopper<% end %>.
     </p>
     <br>
     <%= image_tag attachments['logo.png'].url %>
