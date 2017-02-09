@@ -86,8 +86,8 @@ class OrdersController < ApplicationController
     @cart_items.each do |item|
       @cart_total += item.quantity * item.product.price
     end
-    if @cart_total > 5000
-      @shipping_cost = 100.to_f
+    if @cart_total < 5000
+      @shipping_cost = 50.to_f
     else
       @shipping_cost = 0.to_f
     end
