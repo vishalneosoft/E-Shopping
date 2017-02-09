@@ -1,7 +1,7 @@
 <div id="edit_address">
   <div class="col-sm-12">
     <% @addresses.each do |address| %>
-      <% if address.status == '' %>
+      <% unless address.status == 'inactive' %>
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-body">

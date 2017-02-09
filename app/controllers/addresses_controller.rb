@@ -39,9 +39,8 @@ class AddressesController < ApplicationController
   # PATCH/PUT /addresses/1
   # PATCH/PUT /addresses/1.json
   def update
-    @address.update(status: 'inactive')
     respond_to do |format|
-      if @address.update(address_params)
+      if @address.update(status: 'inactive')
         format.html { redirect_to :back, notice: 'Address was successfully destroyed.' }
         format.json { render :show, status: :ok, location: @address }
       else
