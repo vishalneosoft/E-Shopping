@@ -49,6 +49,7 @@ class CartItemsController < ApplicationController
       respond_to do |format|
         if @cart_item.save
           @cart_items = current_user.cart_items
+          @createmsg = 'Item added to cart successfully'
           format.html { redirect_to :back, notice: 'Item added to cart successfully' }
           format.json { render :show, status: :created, location: @cart_item }
           format.js
@@ -91,6 +92,7 @@ class CartItemsController < ApplicationController
         else
           @shipping_cost = 0.to_f
         end
+        @updatemsg = 'Item successfully updated.'
         format.html { redirect_to :back, notice: 'Item successfully updated.' }
         format.json { render :show, status: :ok, location: @cart_item }
         format.js 
@@ -117,6 +119,7 @@ class CartItemsController < ApplicationController
     else
       @shipping_cost = 0.to_f
     end
+    @deletemsg = "Item was successfully removed!"
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Item was successfully removed!' }
       format.json { head :no_content }

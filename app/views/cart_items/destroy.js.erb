@@ -4,3 +4,4 @@ $('#total-count').html('<i class=\'fa fa-shopping-cart\'></i> Cart (<%= @cart_it
 $('#cart-sub-total').html("<%= j (render 'cart_items/cart_total') %>")
 $('#checkout-total').html("<%= j (render 'check_outs/checkout_shipping_total') %>")
 $('#review-order').html("<%= j (render 'check_outs/review_order') %>")
+$('#flashMessage').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><%= @deletemsg %></div>')
