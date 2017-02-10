@@ -62,9 +62,11 @@ $(document).ready(function(){
     var max = $(this).attr('max');
     var productId = $(this).attr('product_id');
     var id = $(this).attr('id');
+    var originalval = $(this).attr('value');
     var cartId = id.replace('quantity-update-','');
     if( value == '' || value > max || value <= 0 )
-    {
+    { 
+      $("#"+id).val(originalval);
       alert("Quantity should be between "+min+" and "+max);
     }
     else
