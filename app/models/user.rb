@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :order_items, dependent: :destroy
-
+  has_many :wish_lists, dependent: :destroy
   after_create :send_admin_mail
 
   def send_admin_mail
