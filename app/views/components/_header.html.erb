@@ -48,8 +48,15 @@
           <div class="shop-menu pull-right">
             <ul class="nav navbar-nav">
               <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-              <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-              <% if user_signed_in? %>  
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to wish_lists_path, id: 'wishlist-count' do%>
+                    <i class="fa fa-heart"></i> Wishlist
+                    <% if current_user.wish_lists.count>0 %>
+                      (<%= current_user.wish_lists.count %>)
+                    <% end %>
+                  <% end %>
+                </li> 
                 <li>
                   <%= link_to cart_items_path, id: 'total-count' do%>
                     <i class="fa fa-shopping-cart"></i> Cart 
@@ -59,6 +66,11 @@
                   <% end %>
                 </li>  
               <% else %>
+                <li>
+                  <%= link_to wish_lists_path do%>
+                    <i class="fa fa-heart"></i> Wishlist 
+                  <% end %>
+                </li>
                 <li>
                   <%= link_to cart_items_path do%>
                     <i class="fa fa-shopping-cart"></i> Cart 
