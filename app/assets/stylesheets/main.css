@@ -2669,4 +2669,5 @@ h2.title {
 .font-awesome-size-show {
   margin-top: 10px;
   font-size: 20px;
+  text-shadow: 2px 2px 2px #ccc;
 }

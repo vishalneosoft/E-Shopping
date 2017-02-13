@@ -1,0 +1,9 @@
+<% unless current_user.wish_lists.pluck(:product_id).include?(@product.id) %>
+  <%= link_to wish_lists_path(product_id: @product.id), method: :post, style: 'color: black', remote: true do %>
+    <i class="fa fa-heart-o font-awesome-size-show"> Save to Wishlist</i>
+  <% end %>
+<% else %>
+  <%= link_to wish_list_path(id: @product.id),id: 'product-wishlist-remove-#{@product.id}', remote: true, :method => :delete do %>
+    <i class="fa fa-heart font-awesome-size-show" style="color: red"> Saved</i>
+  <% end %>
+<% end %>

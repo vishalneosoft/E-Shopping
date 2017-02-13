@@ -1,3 +1,4 @@
+$('#wishlist-product-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'products/product_wishlist') %>");
 $('.single-products-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/product_increase', :locals => { product: @product }) %>");
 $('#single-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/category_product', :locals => { product: @product }) %>");
 $('#wishlist-count').html('<i class=\'fa fa-shopping-cart\'></i> Wishlist (<%= @wish_lists.count%>)')
