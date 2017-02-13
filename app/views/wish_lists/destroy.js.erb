@@ -1,3 +1,4 @@
+$('#wish_list_index').html("<%= escape_javascript render(:partial => 'wish_lists/index_wishlist') %>");
 $('#wishlist-product-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'products/product_wishlist') %>");
 $('.single-products-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/product_increase', :locals => { product: @product }) %>");
 $('#single-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/category_product', :locals => { product: @product }) %>");

@@ -2671,3 +2671,11 @@ h2.title {
   font-size: 20px;
   text-shadow: 2px 2px 2px #ccc;
 }
+
+.table-border {
+  border: 1px solid #ddd;
+}
+
+.table-padding {
+  padding-top: 20px
+}

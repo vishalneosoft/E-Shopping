@@ -1,0 +1,50 @@
+<% if current_user.wish_lists.present? %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4 style="text-align: center;">My Wishlist</h4></div>
+  </div>
+  <% current_user.wish_lists.each do |wish_list| %>
+    <div class="col-sm-6" style="padding: 0px">
+      <table class="table table-border">
+      <tbody>
+        <tr>
+          <td class="col-sm-2">
+            <%= image_tag(wish_list.product.pictures.first.avatar.url,class: 'cart-image') %>
+          </td>
+          <td class="col-sm-6">
+            <p class="table-padding"><%= wish_list.product.name %></p>
+            <b><p>&#8377; <%= wish_list.product.price %></p></b>
+          </td>
+          <td class="col-sm-4 table-padding">
+            <p class="table-padding"><b>Added on:</b> <%= wish_list.created_at.strftime("%d-%b-%y") %></p>
+            <% unless current_user.cart_items.pluck(:product_id).include?wish_list.product_id %>
+              <%= link_to cart_items_path(product_id: wish_list.product_id),method: :post, class: 'btn btn-width2', remote: true do %>
+                <i class="fa fa-shopping-cart"> Add to cart</i>
+              <% end %>
+            <% else %>
+              <%= link_to cart_items_path,class: "btn btn-width2" do %>
+                <i class="fa fa-shopping-cart"></i>
+                Go to cart
+              <% end %>
+            <% end %>
+            <%= link_to wish_list_path(id: wish_list.product_id), :method => :delete, remote: true do %>
+              <i class="fa fa-trash table-padding"> Remove</i>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  <% end %>
+<% else %>
+  <section id="cart_items">
+    <div class="container">
+      <div class="cart_info">
+        <h2 style="text-align: center;">Your Wishlist Bag is Empty</h2>
+        <br>
+        <h4 style="text-align: center;">Add Product to Wishlist</h4>
+        <br>
+        <h4 style="text-align: center;"><%= link_to 'Continue Shopping', root_path, class: 'btn btn-width2' %></h4>
+      </div>
+    </div>
+  </section>
+<% end %>
