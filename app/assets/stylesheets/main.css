@@ -197,7 +197,7 @@ a#scrollUp i{
 
 
 .shop-menu ul li a {
-  background: #FFFFFF;
+  
   color: #696763;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -214,8 +214,8 @@ a#scrollUp i{
 
 
 .shop-menu ul li a:hover {
-	color:#fe980f;
-	background:#fff;
+	background:none;
+  color:#fe980f;
 }
 
 
@@ -2678,4 +2678,15 @@ h2.title {
 
 .table-padding {
   padding-top: 20px
+}
+
+.paragraph-line {
+  line-height: 10px;
+}
+
+.order-image {
+  height: 125px;
+  width: 100px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
 }

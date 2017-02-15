@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  charge: MyString
+  charge_id: MyString
+  amount: 1
+  stripetoken: MyString
+  stripeemail: MyString
+  order_id: 
+
+two:
+  charge: MyString
+  charge_id: MyString
+  amount: 1
+  stripetoken: MyString
+  stripeemail: MyString
+  order_id: 

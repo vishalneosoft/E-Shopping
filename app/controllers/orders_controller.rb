@@ -2,6 +2,10 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :cart_total, only: [:create]
 
+  def index
+    @orders = current_user.orders
+  end
+
   def new
   end
 
@@ -49,6 +53,8 @@ class OrdersController < ApplicationController
     if params[:stripeToken].present?
       @order.update(status: 'success',transaction_id: params[:stripeToken])
     end
+    @transaction = Transaction.new(charge: charge[:customer],charge_id: charge[:id],amount: charge[:amount],stripetoken: params[:stripeToken],stripeemail: params[:stripeEmail],order_id: params[:id])
+    @transaction.save
     @cart_items = current_user.cart_items
     @cart_items.each do |cart_item|
       @product = Product.find(cart_item.product_id)
@@ -71,12 +77,16 @@ class OrdersController < ApplicationController
   def cancel_order
     @order = Order.find(params[:id])
     @order.update(status: 'cancel')
+    @transaction = Transaction.find_by(order_id: params[:id])
+    charge = Stripe::Charge.retrieve(@transaction.charge_id)
+    charge.refund
     @orderitems = @order.order_items
     @orderitems.each do |order_item|
       @product = Product.find(order_item.product_id)
       @product.quantity += order_item.quantity
       @product.save
     end
+    OrderMailer.order_cancel_email(current_user,@order,@address).deliver_now
     redirect_to order_path(params[:id])
   end
 

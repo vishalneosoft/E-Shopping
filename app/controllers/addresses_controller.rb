@@ -1,10 +1,12 @@
 class AddressesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    @addresses = current_user.addresses
+    @address = Address.new
   end
 
   # GET /addresses/1
@@ -39,9 +41,15 @@ class AddressesController < ApplicationController
   # PATCH/PUT /addresses/1
   # PATCH/PUT /addresses/1.json
   def update
+    @address = Address.find(params[:id])
     respond_to do |format|
-      if @address.update(status: 'inactive')
+      if params[:status].present?
+        @address.update(status: 'inactive')
         format.html { redirect_to :back, notice: 'Address was successfully destroyed.' }
+        format.json { render :show, status: :ok, location: @address }
+      elsif
+        @address.update(address_params)
+        format.html { redirect_to :back, notice: 'Address was successfully updated.' }
         format.json { render :show, status: :ok, location: @address }
       else
         format.html { render :edit }

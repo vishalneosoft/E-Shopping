@@ -1,45 +1,63 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Addresses</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Address 1</th>
-      <th>Address 2</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Country</th>
-      <th>Zipcode</th>
-      <th>Address type</th>
-      <th>Name</th>
-      <th>Mobile number</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<% if current_user.addresses.present? %>
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>My Address</h4>
+      </div>
+    </div>
     <% @addresses.each do |address| %>
-      <tr>
-        <td><%= address.user_id %></td>
-        <td><%= address.address1 %></td>
-        <td><%= address.address2 %></td>
-        <td><%= address.city %></td>
-        <td><%= address.state %></td>
-        <td><%= address.country %></td>
-        <td><%= address.pincode %></td>
-        <td><%= address.address_type %></td>
-        <td><%= address.name %></td>
-        <td><%= address.phone %></td>
-        <td><%= link_to 'Show', address %></td>
-        <td><%= link_to 'Edit', edit_address_path(address) %></td>
-        <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% unless address.status == 'inactive' %>
+        <div class="col-sm-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p style="font-size: 20px"><%= address.name %></p>
+              <hr>
+              <p class="paragraph-line"><%= address.address1 %></p>
+              <p class="paragraph-line""><%= address.address2 %></p>
+              <p class="paragraph-line"><%= address.pincode %></p>
+              <p class="paragraph-line"><%= address.city %></p>
+              <p class="paragraph-line"><%= address.state %></p>
+              <p class="paragraph-line"><%= address.country %></p>
+              <hr>
+              <p class="paragraph-line"><%= address.phone %></p>
+              <hr>
+              <%= link_to edit_address_path(address), remote: true, style: "color: black" do %>
+                <i class="fa fa-pencil-square-o"></i>
+                <span>EDIT</span>
+              <% end %>
+              <%= link_to address_path(address,status: 'off'), method: :put, style: "color: black;margin-left: 180px" do %>
+                <i class="fa fa-trash-o"></i>
+                <span>DELETE</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Address', new_address_path %>
+  </div>
+  <div class="modal fade" id="myModal2" role="dialog">
+    <%= render 'addresses/form_edit' %>
+  </div>
+<% else %>
+  <section id="cart_items">
+    <div class="container">
+      <div class="cart_info">
+        <h2 style="text-align: center;">You haven't Saved any Address</h2>
+        <br>
+        <h4 style="text-align: center;">Please add new Address</h4>
+      </div>
+    </div>
+  </section>
+<% end %>
+<div id="new_address" style="margin-left: 30px">
+  <%= button_tag "Add New Addresss", class: "btn btn-width2", "data-toggle" => "modal", "data-target" => "#myModal3" %>
+</div>
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog" style="width: 400px">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= render 'addresses/form' %>
+      </div>
+    </div>
+  </div>
+</div>

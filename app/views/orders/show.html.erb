@@ -1,85 +1,76 @@
-<% if @order.status == 'success' %>
-  <section id="cart_items">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2>Thank-You</h2>
+<section id="cart_items">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>Thank-You</h2>
+      <% if @order.status == 'success' %>
         <p>Your Order with order-id: <%= @order.id %> is <b
         >Complete</b>, you paid <b>&#8377; <%= @order.grand_total %></b></p>
-      </div>
-      <div class="panel-body">
-        <%= image_tag('home/logo.png')%>
-        <h3>Invoice</h3>
-        <hr>
-        <p style="font-size: 20px"><%= @address.name %></p>
-        <p class="address_para"><%= @address.address1 %></p>
-        <p class="address_para"><%= @address.address2 %></p>
-        <p class="address_para"><%= @address.pincode %></p>
-        <p class="address_para"><%= @address.city %></p>
-        <p class="address_para"><%= @address.state %></p>
-        <p class="address_para"><%= @address.country %></p>
-        <p><%= @address.phone %></p>
-        <hr>
-        <table class="table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @subtotal = 0 %>
-          <% @orderitems.each do |order_item| %>
-            <tr>
-              <td><%= order_item.product.name %></td>
-              <td><%= order_item.quantity %></td>
-              <td><%= order_item.product.price %></td>
-              <td><%= order_item.amount %></td>
-              <% @subtotal += order_item.amount.to_f %>
-            </tr>
-          <% end %>
-          <tr>
-            <th></th>
-            <th></th>
-            <th>Sub-Total</th>
-            <td><%= @subtotal%></td>
-          </tr>
-          <tr>
-            <th class="no-line"></th>
-            <th class="no-line"></th>
-            <th class="no-line">Service Tax</th>
-            <td class="no-line"><%= @subtotal*0.15 %></td>
-          </tr>
-          <tr>
-            <th class="no-line"></th>
-            <th class="no-line"></th>
-            <th class="no-line">Shipping-Charge</th>
-            <td class="no-line"><%= @order.shipping_charge%></td>
-          </tr>
-          <tr>
-            <th class="no-line"></th>
-            <th class="no-line"></th>
-            <th class="no-line">Total</th>
-            <td class="no-line"><%= @order.grand_total%></td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-      <div class="panel-footer">
-        <h4><%= link_to 'Cancel Order', cancel_order_order_path(@order), class: 'btn btn-width2' %></h4>
-        <h4><%= link_to 'Continue Shopping', root_path, class: 'btn btn-width2' %></h4>
-      </div>
+      <% else %>
+        <p>Your Order with order-id: <%= @order.id %> has been <b>Cancelled</b></p>
+      <% end %>
     </div>
-  </section>
-<% else %>
-  <section id="cart_items">
-    <div class="container">
-      <div class="cart_info">
-        <h2 style="text-align: center;">Thank-You</h2>
-        <p style="text-align: center;">Your Order with order-id: <%= @order.id %> has been <b>Cancelled</b></p>
-        <h4 style="text-align: center;"><%= link_to 'Continue Shopping', root_path, class: 'btn btn-width2' %></h4>
-      </div>
+    <div class="panel-body">
+      <%= image_tag('home/logo.png')%>
+      <h3>Invoice</h3>
+      <hr>
+      <p style="font-size: 20px"><%= @address.name %></p>
+      <p class="address_para"><%= @address.address1 %></p>
+      <p class="address_para"><%= @address.address2 %></p>
+      <p class="address_para"><%= @address.pincode %></p>
+      <p class="address_para"><%= @address.city %></p>
+      <p class="address_para"><%= @address.state %></p>
+      <p class="address_para"><%= @address.country %></p>
+      <p><%= @address.phone %></p>
+      <hr>
+      <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subtotal = 0 %>
+        <% @orderitems.each do |order_item| %>
+          <tr>
+            <td><%= order_item.product.name %></td>
+            <td><%= order_item.quantity %></td>
+            <td><%= order_item.product.price %></td>
+            <td><%= order_item.amount %></td>
+            <% @subtotal += order_item.amount.to_f %>
+          </tr>
+        <% end %>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Sub-Total</th>
+          <td><%= @subtotal%></td>
+        </tr>
+        <tr>
+          <th class="no-line"></th>
+          <th class="no-line"></th>
+          <th class="no-line">Service Tax</th>
+          <td class="no-line"><%= @subtotal*0.15 %></td>
+        </tr>
+        <tr>
+          <th class="no-line"></th>
+          <th class="no-line"></th>
+          <th class="no-line">Shipping-Charge</th>
+          <td class="no-line"><%= @order.shipping_charge%></td>
+        </tr>
+        <tr>
+          <th class="no-line"></th>
+          <th class="no-line"></th>
+          <th class="no-line">Total</th>
+          <td class="no-line"><%= @order.grand_total%></td>
+        </tr>
+      </tbody>
+    </table>
     </div>
-  </section>
-<% end %>
+    <div class="panel-footer">
+      <h4><%= link_to 'Continue Shopping', root_path, class: 'btn btn-width2' %></h4>
+    </div>
+  </div>
+</section>

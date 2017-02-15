@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Thank-You</h2>
+    <p>Your Order with order-id: <%= @order.id %> is <b
+    >Cancelled</b>, you paid <b>&#8377; <%= @order.grand_total %></b> which has been <b>Refunded</b> to your Account.</p>
+    <%= image_tag attachments['logo.png'].url %>
+  </body>
+</html>

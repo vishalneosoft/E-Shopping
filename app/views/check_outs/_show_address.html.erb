@@ -22,7 +22,7 @@
                 <i class="fa fa-pencil-square-o"></i>
                 <span>EDIT</span>
               <% end %>
-              <%= link_to address_path(address), method: :put, style: "color: black;margin-left: 180px" do %>
+              <%= link_to address_path(address,status: 'off'), method: :put, style: "color: black;margin-left: 180px" do %>
                 <i class="fa fa-trash-o"></i>
                 <span>DELETE</span>
               <% end %>

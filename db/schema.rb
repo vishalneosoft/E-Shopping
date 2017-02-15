@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211094929) do
+ActiveRecord::Schema.define(version: 20170214140342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,19 @@ ActiveRecord::Schema.define(version: 20170211094929) do
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree
 
+  create_table "transactions", force: :cascade do |t|
+    t.string   "charge"
+    t.string   "charge_id"
+    t.integer  "amount"
+    t.string   "stripetoken"
+    t.string   "stripeemail"
+    t.integer  "order_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "transactions", ["order_id"], name: "index_transactions_on_order_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -194,6 +207,7 @@ ActiveRecord::Schema.define(version: 20170211094929) do
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
   add_foreign_key "products", "brands"
+  add_foreign_key "transactions", "orders"
   add_foreign_key "wish_lists", "products"
   add_foreign_key "wish_lists", "users"
 end

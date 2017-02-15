@@ -47,7 +47,21 @@
         <div class="col-sm-8">
           <div class="shop-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+              <li class="dropdown"><a href="#"><i class="fa fa-user"></i> Account <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                <ul role="menu" class="sub-menu">
+                  <li><a href="#"><i class="fa fa-user-o" aria-hidden="true"></i> My Account</a></li><br>
+                  <li>
+                    <%= link_to addresses_path do %>
+                      <i class="fa fa-address-book-o"></i> My Address
+                    <% end %>
+                  </li><br>
+                  <li>
+                    <%= link_to orders_path do %>
+                      <i class="fa fa-bars"></i> My Orders
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
               <% if user_signed_in? %>
                 <li>
                   <%= link_to wish_lists_path, id: 'wishlist-count' do%>
@@ -112,21 +126,6 @@
           <div class="mainmenu pull-left">
             <ul class="nav navbar-nav collapse navbar-collapse">
               <li><%= link_to 'Home', root_path, class: 'active' %></li>
-              <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                <ul role="menu" class="sub-menu">
-                  <li><a href="#">Products</a></li>
-                  <li><a href="#">Product Details</a></li> 
-                  <li><a href="#">Checkout</a></li> 
-                  <li><a href="#">Cart</a></li> 
-                  <li><a href="#">Login</a></li> 
-                </ul>
-              </li> 
-              <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                <ul role="menu" class="sub-menu">
-                  <li><a href="#">Blog List</a></li>
-                  <li><a href="#">Blog Single</a></li>
-                </ul>
-              </li> 
               <li><a href="#">Contact</a></li>
             </ul>
           </div>

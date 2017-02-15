@@ -21,6 +21,10 @@
 //     }
 // }
 
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+
 $(document).ready(function(){ 
   $(document).on("click","#form-close",function() {
     $("new_address").slideUp();

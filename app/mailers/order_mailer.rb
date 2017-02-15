@@ -9,4 +9,13 @@ class OrderMailer < ApplicationMailer
     email_with_name = %("#{@user.first_name}" <#{@user.email}>)
     mail(to: @user.email, subject: 'Order has been successfully created')
   end
+
+  def order_cancel_email(user,order,address)
+    @user = user
+    @order = order
+    @address = address
+    attachments.inline['logo.png'] = File.read("app/assets/images/home/logo.png")
+    email_with_name = %("#{@user.first_name}" <#{@user.email}>)
+    mail(to: @user.email, subject: 'Order has been successfully cancelled')
+  end
 end
