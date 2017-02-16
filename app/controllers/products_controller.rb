@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
     @brands = Brand.all
     @cartitems = CartItem.all
     @cartitem = CartItem.new
+    @recommended = @product.products
   end
 
   # GET /products/new

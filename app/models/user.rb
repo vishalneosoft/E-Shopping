@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
   has_many :order_items, dependent: :destroy
   has_many :wish_lists, dependent: :destroy
   after_create :send_admin_mail
-
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  
   def send_admin_mail
     UserMailer.welcome_email(self).deliver
   end

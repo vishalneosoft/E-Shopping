@@ -73,40 +73,35 @@
         <div class="product-details"><!--product-details-->
           <div class="col-sm-5">
             <div class="view-product">
-              <%= image_tag(@product.pictures.find_by(imageable_id: @product.id).avatar.url) %>
+              <%= image_tag(@product.pictures.find_by(imageable_id: @product.id).avatar.url, id: 'image_show') %>
               <h3>ZOOM</h3>
             </div>
-            <div id="similar-product" class="carousel slide" data-ride="carousel">
-              
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner">
-                <div class="item active">
-                  <a href=""><%= image_tag "product-details/similar1.jpg" %></a>
-                  <a href=""><%= image_tag "product-details/similar2.jpg" %></a>
-                  <a href=""><%= image_tag "product-details/similar3.jpg" %></a>
+            <% if @product.pictures.count>1 %>
+              <div id="similar-product" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <% @product.pictures.each_with_index do |image,index|%>
+                      <% if index>0 && index<=3 %>
+                      <%= image_tag(image.avatar.url,size: "85x85", onclick: "show_image('#{image.avatar.url}')") %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div class="item">
+                    <% @product.pictures.each_with_index do |image,index|%>
+                      <% if index>3 && index<=6 %>
+                      <%= image_tag(image.avatar.url,size: "85x85",onclick: "show_image('#{image.avatar.url}')") %>
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
-                <div class="item">
-                  <a href=""><%= image_tag "product-details/similar1.jpg" %></a>
-                  <a href=""><%= image_tag "product-details/similar2.jpg" %></a>
-                  <a href=""><%= image_tag "product-details/similar3.jpg" %></a>
-                </div>
-                <div class="item">
-                  <a href=""><%= image_tag "product-details/similar1.jpg" %></a>
-                  <a href=""><%= image_tag "product-details/similar2.jpg" %></a>
-                  <a href=""><%= image_tag "product-details/similar3.jpg" %></a>
-                </div>
-                
+                <a class="left item-control" href="#similar-product" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="right item-control" href="#similar-product" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+                </a>
               </div>
-
-              <!-- Controls -->
-              <a class="left item-control" href="#similar-product" data-slide="prev">
-              <i class="fa fa-angle-left"></i>
-              </a>
-              <a class="right item-control" href="#similar-product" data-slide="next">
-              <i class="fa fa-angle-right"></i>
-              </a>
-            </div>
-
+            <% end %>
           </div>
           <div class="col-sm-7">
             <div id="show-product-<%= @product.id %>">

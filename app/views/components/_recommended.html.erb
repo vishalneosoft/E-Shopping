@@ -1,90 +1,42 @@
 <div class="recommended_items"><!--recommended_items-->
   <h2 class="title text-center">recommended items</h2>
-  
+  <% if @recommended.present? %>
   <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="item active"> 
-        <div class="col-sm-4">
-          <div class="product-image-wrapper">
-            <div class="single-products">
-              <div class="productinfo text-center">
-                <%= image_tag('home/recommend1.jpg')%>
-                <h2>$56</h2>
-                <p>Easy Polo Black Edition</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+      <% @recommended.each_slice(3).with_index do |products, index| %>
+        <div class="item <%= index == 0 ? 'active' : '' %>">
+          <% products.each do |product|%>
+            <div class="col-sm-4">
+              <div class="product-image-wrapper">
+                <div class="single-products">
+                  <div class="productinfo text-center">
+                    <%= link_to product_path(product) do %>
+                      <%= image_tag(product.pictures.find_by(imageable_id: product.id).avatar.url,size: '134x268') %>
+                      <h2>&#8377; <%= product.price%></h2>
+                      <p><acronym title="<%= product.name %>"> <%= truncate(product.name , length:23) %></acronym></p>
+                    <% end %>
+                    <% if user_signed_in? %>
+                      <% unless current_user.cart_items.pluck(:product_id).include?(product.id) %>
+                        <%= link_to cart_items_path(product_id: product.id),method: :post, class: 'btn btn-default add-to-cart' do %>
+                          <i class="fa fa-shopping-cart"> Add to cart</i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to cart_items_path, class: 'btn btn-default add-one-cart' do %>
+                          <i class="fa fa-shopping-cart"> Go to cart</i>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to cart_items_path(product_id: product.id),method: :post, class: 'btn btn-default add-to-cart' do %>
+                        <i class="fa fa-shopping-cart"> Add to cart</i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
-              
             </div>
-          </div>
+          <% end %>
         </div>
-        <div class="col-sm-4">
-          <div class="product-image-wrapper">
-            <div class="single-products">
-              <div class="productinfo text-center">
-                <%= image_tag('home/recommend2.jpg')%>
-                <h2>$56</h2>
-                <p>Easy Polo Black Edition</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="product-image-wrapper">
-            <div class="single-products">
-              <div class="productinfo text-center">
-                <%= image_tag('home/recommend3.jpg')%>
-                <h2>$56</h2>
-                <p>Easy Polo Black Edition</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="item">  
-        <div class="col-sm-4">
-          <div class="product-image-wrapper">
-            <div class="single-products">
-              <div class="productinfo text-center">
-                <%= image_tag('home/recommend1.jpg')%>
-                <h2>$56</h2>
-                <p>Easy Polo Black Edition</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="product-image-wrapper">
-            <div class="single-products">
-              <div class="productinfo text-center">
-                <%= image_tag('home/recommend2.jpg')%>
-                <h2>$56</h2>
-                <p>Easy Polo Black Edition</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="product-image-wrapper">
-            <div class="single-products">
-              <div class="productinfo text-center">
-                <%= image_tag('home/recommend3.jpg')%>
-                <h2>$56</h2>
-                <p>Easy Polo Black Edition</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
      <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
       <i class="fa fa-angle-left"></i>
@@ -93,4 +45,15 @@
       <i class="fa fa-angle-right"></i>
       </a>      
   </div>
+  <% else %>
+    <section id="cart_items">
+      <div>
+        <div class="cart_info">
+          <br>
+          <h2 style="text-align: center;">No Recommended Products</h2>
+          <br>
+        </div>
+      </div>
+    </section>
+  <% end %>
 </div><!--/recommended_items-->

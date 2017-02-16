@@ -20,6 +20,10 @@
 //       });
 //     }
 // }
+function show_image(avatar_url)
+  { 
+    $("#image_show").attr("src", avatar_url)
+  }
 
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   

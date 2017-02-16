@@ -1,0 +1,20 @@
+<div class="modal-dialog" style="width: 400px">
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="bill-to">
+        <%= form_for @contact do |f| %>
+          <div class="row">
+            <div class="col-sm-12 billing">
+              <%= f.text_area :message, disabled: true, id: 'message', class: "form-control", required: "required", rows: "8", placeholder: "Comment" %>
+              <br>
+              <p>Message</p>
+              <%= f.text_area :reply, id: 'message', class: "form-control", required: "required", rows: "8", placeholder: "Comment" %>
+              <%= f.submit "Send", class: 'btn btn-width' %>
+              <button type="button" class="btn btn-width3" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
