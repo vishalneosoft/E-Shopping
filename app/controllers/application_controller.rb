@@ -17,14 +17,12 @@ class ApplicationController < ActionController::Base
   def render_404
     respond_to do |format|
       format.html { redirect_to root_path, alert: 'Record Not Found' }
-      format.all { render nothing: true, status: 404 }
     end
   end
 
   def routing_error
     respond_to do |format|
       format.html { redirect_to root_path, alert: 'No Route Matches' }
-      format.all { render nothing: true, status: 404 }
     end
   end
 
