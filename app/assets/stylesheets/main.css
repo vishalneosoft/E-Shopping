@@ -2698,3 +2698,13 @@ h2.title {
   border-radius: 10px;
   padding-left: 20px;
 }
+
+.progress_bar_size {
+  line-height: 35px;
+  font-size: 16px;
+}
+
+.btn-margin-order {
+  margin-top: -110px;
+  margin-left: 1000px;
+}

@@ -3,4 +3,4 @@ $('.single-products-'+<%= @product.id %>).html("<%= escape_javascript render(:pa
 $('#single-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/category_product', :locals => { product: @product }) %>");
 $('#show-product-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'products/product_show') %>");
 $('#total-count').html('<i class=\'fa fa-shopping-cart\'></i> Cart (<%= @cart_items.count%>)')
-$('#flashMessage').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><%= @createmsg %></div>')
+$('#flashMessage').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><%= @create_msg %></div>')

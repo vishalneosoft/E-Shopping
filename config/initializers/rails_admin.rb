@@ -1,7 +1,22 @@
 RailsAdmin.config do |config|
 
   ### Popular gems integration
-
+  RailsAdmin.config do |config|
+    config.model 'Order' do
+      field :user
+      field :address
+      field :transaction_id
+      field :grand_total
+      field :shipping_charge
+      field :payment_gateway_id
+      field :order_items
+      edit do
+        field :status do
+          partial "status_field"
+        end
+      end
+    end
+  end
   ## == Devise ==
   config.authenticate_with do
     warden.authenticate! scope: :user

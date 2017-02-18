@@ -14,9 +14,13 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @address = @order.address
-    @orderitems = @order.order_items
+    if current_user.orders.pluck(:id).include?(params[:id].to_i)
+      @order = Order.find(params[:id])
+      @address = @order.address
+      @orderitems = @order.order_items
+    else 
+      redirect_to root_path, alert: 'Sorry you dont have such order.'
+    end
   end
 
   def create
@@ -90,6 +94,8 @@ class OrdersController < ApplicationController
     redirect_to order_path(params[:id])
   end
 
+  private
+
   def cart_total
     @cart_items = current_user.cart_items
     @cart_total = 0
@@ -104,8 +110,6 @@ class OrdersController < ApplicationController
     @cart_tax=(0.15)*@cart_total
     @total=@cart_total+@cart_tax+@shipping_cost
   end
-
-  private
 
   def order_params
     { 

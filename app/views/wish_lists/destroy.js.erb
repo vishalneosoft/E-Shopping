@@ -3,4 +3,4 @@ $('#wishlist-product-'+<%= @product.id %>).html("<%= escape_javascript render(:p
 $('.single-products-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/product_increase', :locals => { product: @product }) %>");
 $('#single-'+<%= @product.id %>).html("<%= escape_javascript render(:partial => 'components/category_product', :locals => { product: @product }) %>");
 $('#wishlist-count').html('<i class=\'fa fa-shopping-cart\'></i> Wishlist <%= @wish_lists.count>0 ? "(#{@wish_lists.count})" : "" %>')
-$('#flashMessage').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><%= @wishlistdeletemsg %></div>')
+$('#flashMessage').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><%= @wishlist_delete_msg %></div>')

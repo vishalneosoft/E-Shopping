@@ -1,8 +1,8 @@
-<% if current_user.wish_lists.present? %>
+<% if @wish_lists.present? %>
   <div class="panel panel-default">
     <div class="panel-heading"><h4 style="text-align: center;">My Wishlist</h4></div>
   </div>
-  <% current_user.wish_lists.each do |wish_list| %>
+  <% @wish_lists.each do |wish_list| %>
     <div class="col-sm-6" style="padding: 0px">
       <table class="table table-border">
       <tbody>
@@ -26,7 +26,7 @@
                 Go to cart
               <% end %>
             <% end %>
-            <%= link_to wish_list_path(id: wish_list.product_id), :method => :delete, remote: true do %>
+            <%= link_to wish_list_path(wish_list), :method => :delete, remote: true do %>
               <i class="fa fa-trash table-padding"> Remove</i>
             <% end %>
           </td>
