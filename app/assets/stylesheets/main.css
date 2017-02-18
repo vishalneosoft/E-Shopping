@@ -2708,3 +2708,11 @@ h2.title {
   margin-top: -110px;
   margin-left: 1000px;
 }
+
+.progress_bar_size p {
+  color: black;
+}
+
+.progress_bar_size a {
+  color: white;
+}

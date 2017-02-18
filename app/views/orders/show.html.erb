@@ -90,74 +90,74 @@
         <div class="progress" style="height: 35px">
           <% if @order.status=='success'%>
             <div class="progress-bar progress-bar-info progress_bar_size" role="progressbar" style="width:20%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= success %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= success %>">
                   Ordered
                 </a>
               </p>
             </div>
           <% elsif @order.status=='in-transit'%>
             <div class="progress-bar progress-bar-info progress_bar_size" role="progressbar" style="width:20%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= success %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= success %>">
                   Ordered
                 </a>
               </p>
             </div>
             <div class="progress-bar progress-bar-warning progress_bar_size" role="progressbar" style="width:30%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= in_transit %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= in_transit %>">
                   In Transit
                 </a>
               </p>
             </div>
           <% elsif @order.status=='shipped'%>
             <div class="progress-bar progress-bar-info progress_bar_size" role="progressbar" style="width:20%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= success %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= success %>">
                   Ordered
                 </a>
               </p>
             </div>
             <div class="progress-bar progress-bar-warning progress_bar_size" role="progressbar" style="width:30%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= in_transit %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= in_transit %>">
                   In Transit
                 </a>
               </p>
             </div>
             <div class="progress-bar progress-bar-primary progress_bar_size" role="progressbar" style="width:20%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= shipped %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= shipped %>">
                   Shipped
                 </a>
               </p>
             </div>
           <% elsif @order.status=='delivered' %>
             <div class="progress-bar progress-bar-info progress_bar_size" role="progressbar" style="width:20%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= success %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= success %>">
                   Ordered
                 </a>
               </p>
             </div>
             <div class="progress-bar progress-bar-warning progress_bar_size" role="progressbar" style="width:30%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= in_transit %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= in_transit %>">
                   In Transit
                 </a>
               </p>
             </div>
             <div class="progress-bar progress-bar-primary progress_bar_size" role="progressbar" style="width:25%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= shipped %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= shipped %>">
                   Shipped
                 </a>
               </p>
             </div>
             <div class="progress-bar progress-bar-success progress_bar_size" role="progressbar" style="width:25%">
-              <p style="color: black">
-                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" style="color: white"  data-content="<%= delivered %>">
+              <p>
+                <a href="" target="_self" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="<%= delivered %>">
                   Delivered
                 </a>
               </p>
