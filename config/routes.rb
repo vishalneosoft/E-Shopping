@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :contacts
-  resources :transactions
   resources :wish_lists, only: [ :index, :create, :destroy]
-  resources :order_items
   resources :addresses, except: [ :show, :new]
   resources :check_outs
   get 'review_payment', to: 'check_outs#review_payment'
