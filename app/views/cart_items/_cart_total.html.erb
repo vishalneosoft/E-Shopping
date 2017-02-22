@@ -1,7 +1,10 @@
 <div class="total_area">
   <ul>
     <li>Cart Sub Total <span>&#8377; <%= @cart_total %></span></li>
-    <% cart_tax=((0.15)*@cart_total).round(2) %>
+    <% cart_tax=((0.15)*@cart_discount_total).round(2) %>
+    <li>Discount 
+      <span>- &#8377; <%= @discount %></span>
+    </li>
     <li>Service Tax <span>&#8377; <%= cart_tax %></span></li>
     <li>Shipping Cost 
       <% if @shipping_cost > 0 %>
@@ -10,7 +13,7 @@
         <span id="shipping_cost"><%= 'Free' %></span>
       <% end %>
     </li>
-    <li>Total <span>&#8377; <%= @cart_total+cart_tax+@shipping_cost %></span></li>
+    <li>Total <span>&#8377; <%= @cart_discount_total+cart_tax+@shipping_cost %></span></li>
   </ul>
     <%= link_to 'Checkout',check_outs_path,class: 'btn btn-default check_out' %>
 </div>

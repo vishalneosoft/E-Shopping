@@ -18,7 +18,6 @@
             </tr>
           </thead>
           <tbody>
-          <% @cart_total=0 %>
           <% @cart_items.each do |cart_item| %>  
             <tr id="cart-item-delete-<%= cart_item.id %>">
               <td class="cart_product">
@@ -32,18 +31,14 @@
               </td>
               <td class="cart_quantity">
                 <div class="cart_quantity_button" id="review-update-<%= cart_item.id %>">
-                  <%= render 'cart_items/product_cart_review', cart_item: cart_item%>
+                  <%= number_field_tag :quantity, "#{cart_item.quantity}", min: 1, max: cart_item.product.quantity, product_id: cart_item.product_id, class: 'cart_quantity_input', id: "quantity-update-#{cart_item.id}",disabled: true, remote: true %>
                 </div>
               </td>
               <td class="cart_total">
                 <% total=cart_item.product.price*cart_item.quantity %>
                 <p class="cart_total_price" id="cart-total-<%= cart_item.id %>">&#8377; <%= total %></p>
               </td>
-              <td class="cart_delete">
-                <%= link_to cart_item, method: :delete, data: { confirm: 'Remove product from cart?', remote: true } do %><i class="fa fa-times"></i><% end %>
-              </td>
             </tr>
-            <% @cart_total += total%>
           <% end %>
             <tr>
               <td colspan="4">&nbsp;</td>

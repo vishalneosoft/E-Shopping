@@ -68,6 +68,10 @@ class OrdersController < ApplicationController
         user_id: current_user.id,amount: (cart_item.product.price*cart_item.quantity))
       @order_item.save
     end
+    @coupon = Coupon.find_by(code: session[:coupon_applied])
+    @coupon_used = UsedCoupon.new(user_id: current_user.id,order_id: params[:id],coupon_id: @coupon.id)
+    @coupon_used.save
+    session[:coupon_applied] = nil
     @cart_items.destroy_all
     @address = @order.address
     OrderMailer.order_email(current_user,@order,@address).deliver_now
@@ -97,11 +101,18 @@ class OrdersController < ApplicationController
   private
 
   def cart_total
+    @coupon = Coupon.find_by(code: session[:coupon_applied])
     @cart_items = current_user.cart_items
-    @cart_total = 0
+    @sub_total = 0
     @cart_items.each do |item|
-      @cart_total += item.quantity * item.product.price
+      @sub_total += item.quantity * item.product.price
     end
+    if @coupon.present?
+        @discount = (@sub_total * @coupon.percent.to_i)/100
+    else
+      @discount = 0
+    end
+    @cart_total = @sub_total - @discount
     if @cart_total < 5000
       @shipping_cost = 50.to_f
     else

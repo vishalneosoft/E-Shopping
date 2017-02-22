@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from ActionController::RoutingError, with: :routing_error
+
+  def routing_error
+    respond_to do |format|
+      format.html { render :partial => 'home/error_404', status: 404 }
+    end
+  end
   
   protected
 
@@ -17,12 +23,6 @@ class ApplicationController < ActionController::Base
   def render_404
     respond_to do |format|
       format.html { redirect_to root_path, alert: 'Record Not Found' }
-    end
-  end
-
-  def routing_error
-    respond_to do |format|
-      format.html { redirect_to root_path, alert: 'No Route Matches' }
     end
   end
 

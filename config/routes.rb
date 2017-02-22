@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   resources :contacts
   resources :transactions
-  resources :wish_lists
+  resources :wish_lists, only: [ :index, :create, :destroy]
   resources :order_items
-  resources :addresses
+  resources :addresses, except: [ :show, :new]
   resources :check_outs
   get 'review_payment', to: 'check_outs#review_payment'
   resources :cart_items
+  get 'remove_coupon', to: 'cart_items#remove_coupon'
+  get 'apply_coupon', to: 'cart_items#apply_coupon' 
   resources :categories do 
     resources :brands
   end
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get 'home/index'
   root 'home#index'
+  get '*unmatched_route' => 'application#routing_error'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

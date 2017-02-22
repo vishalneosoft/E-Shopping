@@ -29,6 +29,17 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
 
+function coupon_value()
+  {
+    coupon = $("#coupon_used").val();
+    $.ajax({
+      url: "/apply_coupon",
+      type: "GET",
+      data: { "coupon" :coupon },
+      dataType: "script"
+      });
+  }
+
 $(document).ready(function(){ 
   $(document).on("click","#form-close",function() {
     $("new_address").slideUp();

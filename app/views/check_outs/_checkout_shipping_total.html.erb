@@ -1,8 +1,12 @@
 <tr>
   <td>Cart Sub Total</td>
-  <td>&#8377; <%= @cart_total %></td>
+  <td>&#8377; <%= @sub_total %></td>
 </tr>
-<% @cart_tax=(0.15)*@cart_total %>
+<tr>
+  <td>Discount</td>
+  <td>- &#8377; <%= @discount %></td>
+</tr>
+<% @cart_tax=((0.15)*@cart_total).round(2) %>
 <tr>
   <td>Service Tax</td>
   <td>&#8377; <%= @cart_tax %></td>

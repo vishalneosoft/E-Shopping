@@ -1,0 +1,3 @@
+$('#coupon_applied').html("<%= j (render 'cart_items/coupon_apply') %>")
+$('#cart-sub-total').html("<%= j (render 'cart_items/cart_total', locales: { cart_total: @cart_total}) %>")
+$('#coupon_msg').html('<%= @coupon_msg %>')
