@@ -73,8 +73,10 @@ class OrdersController < ApplicationController
       @order_item.save
     end
     @coupon = Coupon.find_by(code: session[:coupon_applied])
-    @coupon_used = UsedCoupon.new(user_id: current_user.id,order_id: params[:id],coupon_id: @coupon.id)
-    @coupon_used.save
+    if @coupon.present?
+      @coupon_used = UsedCoupon.new(user_id: current_user.id,order_id: params[:id],coupon_id: @coupon.id)
+      @coupon_used.save
+    end
     session[:coupon_applied] = nil
     @cart_items.destroy_all
     @address = @order.address
