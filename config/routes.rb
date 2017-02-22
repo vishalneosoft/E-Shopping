@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :contacts
   resources :wish_lists, only: [ :index, :create, :destroy]
   resources :addresses, except: [ :show, :new]
-  resources :check_outs
+  resources :check_outs, only: [ :index]
   get 'review_payment', to: 'check_outs#review_payment'
   resources :cart_items
   get 'remove_coupon', to: 'cart_items#remove_coupon'
