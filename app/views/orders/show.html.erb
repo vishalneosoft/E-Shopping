@@ -33,27 +33,39 @@
         </tr>
       </thead>
       <tbody>
-        <% @subtotal = 0 %>
+        <% sub_total = 0 %>
         <% @orderitems.each do |order_item| %>
           <tr>
             <td><%= order_item.product.name %></td>
             <td><%= order_item.quantity %></td>
             <td><%= order_item.product.price %></td>
             <td><%= order_item.amount %></td>
-            <% @subtotal += order_item.amount.to_f %>
+            <% sub_total += order_item.amount.to_f %>
           </tr>
         <% end %>
+        <% if @coupon.present? %>
+          <% discount = (sub_total * @coupon.percent.to_i)/100 %>
+        <% else %>
+          <% discount = 0.0 %>
+        <% end %>
+        <% cart_total = sub_total - discount %>
         <tr>
           <th></th>
           <th></th>
           <th>Sub-Total</th>
-          <td><%= @subtotal%></td>
+          <td><%= sub_total%></td>
+        </tr>
+        <tr>
+          <th class="no-line"></th>
+          <th class="no-line"></th>
+          <th class="no-line">Discount</th>
+          <td class="no-line">- <%= discount %></td>
         </tr>
         <tr>
           <th class="no-line"></th>
           <th class="no-line"></th>
           <th class="no-line">Service Tax</th>
-          <td class="no-line"><%= @subtotal*0.15 %></td>
+          <td class="no-line"><%= (cart_total*0.15).round(2) %></td>
         </tr>
         <tr>
           <th class="no-line"></th>

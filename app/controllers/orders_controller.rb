@@ -18,6 +18,10 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
       @address = @order.address
       @orderitems = @order.order_items
+      @coupon_used = @order.used_coupon
+      if @coupon_used.present?
+        @coupon = Coupon.find(@coupon_used.coupon_id)
+      end
     else 
       redirect_to root_path, alert: 'Sorry you dont have such order.'
     end
