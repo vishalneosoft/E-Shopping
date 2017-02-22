@@ -11,6 +11,7 @@ class UserMailer < ApplicationMailer
 
   def user_message_email(contact)
     @contact = contact
+    @contact_url = 'https://vishal-eshopper.herokuapp.com/contacts'
     @url  = 'https://vishal-eshopper.herokuapp.com/users/sign_in'
     attachments.inline['logo.png'] = File.read("app/assets/images/home/logo.png")
     email_with_name = %("#{@contact.name}" <#{@contact.email}>)
