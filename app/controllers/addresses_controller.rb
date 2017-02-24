@@ -46,16 +46,6 @@ class AddressesController < ApplicationController
     end
   end
 
-  # DELETE /addresses/1
-  # DELETE /addresses/1.json
-  def destroy
-    @address.destroy
-    respond_to do |format|
-      format.html { redirect_to :back, notice: 'Address was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_address

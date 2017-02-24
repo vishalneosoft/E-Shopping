@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
-  resources :contacts
+  resources :contacts, only: [ :index, :edit, :create, :update]
   resources :wish_lists, only: [ :index, :create, :destroy]
-  resources :addresses, except: [ :show, :new]
+  resources :addresses, except: [ :show, :new, :destroy]
   resources :check_outs, only: [ :index]
   get 'review_payment', to: 'check_outs#review_payment'
-  resources :cart_items
+  resources :cart_items, except: [ :show, :new, :edit]
   get 'remove_coupon', to: 'cart_items#remove_coupon'
   get 'apply_coupon', to: 'cart_items#apply_coupon' 
-  resources :categories do 
-    resources :brands
+  resources :categories, only: :show do 
+    resources :brands, only: [ :show]
   end
-  resources :brands
-  resources :products
-  resources :orders do 
+  resources :brands, only: [ :index]
+  resources :products, only: :show
+  resources :orders, except: [ :new, :edit, :update, :destroy] do 
     member do
       get 'payment'
       post 'create_charges'

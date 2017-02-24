@@ -4,11 +4,9 @@ class HomeController < ApplicationController
     @categories = Category.all.where(parent_id: nil)
     @category = Category.first
     if @category.present?
-      @subcategories = @category.sub_categories
-      @subcategory = @category.sub_categories.first
-    end
-    if @subcategory.present?
-      @products = @subcategory.products
+      @sub_categories = @category.sub_categories
+      @sub_category = @sub_categories.first
+      @products = @sub_category.products
     end
     @brands = Brand.all
   end

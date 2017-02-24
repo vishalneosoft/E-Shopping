@@ -6,9 +6,6 @@ class OrdersController < ApplicationController
     @orders = current_user.orders
   end
 
-  def new
-  end
-
   def payment
     @order = Order.find(params[:id])
   end

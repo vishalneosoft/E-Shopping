@@ -1,20 +1,10 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact, only: [ :edit, :update]
 
   # GET /contacts
   # GET /contacts.json
   def index
     @contacts = Contact.where('reply is NULL')
-    @contact = Contact.new
-  end
-
-  # GET /contacts/1
-  # GET /contacts/1.json
-  def show
-  end
-
-  # GET /contacts/new
-  def new
     @contact = Contact.new
   end
 
@@ -50,16 +40,6 @@ class ContactsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /contacts/1
-  # DELETE /contacts/1.json
-  def destroy
-    @contact.destroy
-    respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

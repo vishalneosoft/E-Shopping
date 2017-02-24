@@ -1,25 +1,10 @@
 class CartItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_cart_item, only: [ :show, :edit, :destroy]
   before_action :cart_sum, only: :index
 
   # GET /cart_items
   # GET /cart_items.json
   def index    
-  end
-
-  # GET /cart_items/1
-  # GET /cart_items/1.json
-  def show
-  end
-
-  # GET /cart_items/new
-  def new
-    @cart_item = CartItem.new
-  end
-
-  # GET /cart_items/1/edit
-  def edit
   end
 
   # POST /cart_items
@@ -107,6 +92,7 @@ class CartItemsController < ApplicationController
   # DELETE /cart_items/1
   # DELETE /cart_items/1.json
   def destroy
+    @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
     # method called cart_sum for cart total
     cart_sum
@@ -128,10 +114,6 @@ class CartItemsController < ApplicationController
       @shipping_cost = cart_value[1]
       @discount = cart_value[2]
       @cart_discount_total = cart_value[3]
-    end
-
-    def set_cart_item
-      @cart_item = CartItem.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
