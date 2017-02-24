@@ -2,7 +2,7 @@
   <%= form_for @address do |f| %>
     <div class="row">
       <div class="col-sm-12 billing">
-        <p>Add New Address</p>
+        <p>Address</p>
         <%= f.text_field :name , placeholder: "Name *",id: "name", required: "required" %>
         <%= f.text_field :address1 , placeholder: "Address 1 *", id: "address-field", required: "required", maxlength: "100" %>
         <%= f.text_field :address2 , placeholder: "Address 2" %>

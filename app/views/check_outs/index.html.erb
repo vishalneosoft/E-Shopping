@@ -28,30 +28,9 @@
       <% if current_user.addresses.present? %>
         <%= render 'check_outs/show_address' %>
       <% else %>
-      <div class="row">
-        <div class="col-sm-12 clearfix">
-          <div class="bill-to">
-            <%= form_for @address do |f| %>
-              <div class="row">
-                <div class="col-sm-4 col-sm-offset-3 billing">
-                  <p>Add Delivery Address</p>
-                  <%= f.text_field :name , placeholder: "Name *",id: "name", required: "required" %>
-                  <%= f.text_field :address1 , placeholder: "Address 1 *", id: "address-field", required: "required", maxlength: "100" %>
-                  <%= f.text_field :address2 , placeholder: "Address 2", id: "address-field2" %>
-                  <%= f.text_field :pincode , placeholder: "Zip / Postal Code *", id: "pincode", required: "required",pattern: "[0-9]{6}" %>
-                  <%= f.text_field :city , placeholder: "City *", id: "city", required: "required" %>
-                  <%= f.select(:country, ['United States', 'Bangladesh','UK','India','Pakistan','Ucrane','Canada','Dubai'], {include_blank: "-- Country --"}, id: "country", required: "required") %>
-                  <% @state = ["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Pondicherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Tripura","Uttaranchal","Uttar Pradesh","West Bengal"] %>
-                  <%= f.select(:state, @state, {include_blank: "-- State / Province / Region --"}, id: "state", required: "required") %>
-                  <%= f.text_field :phone , placeholder: "Phone *", id: "phone", required: "required", pattern: "[1-9]{1}[0-9]{9}" %>
-                  <%= f.hidden_field :user_id, value: "#{current_user.id}" %>
-                  <%= f.submit "Save", class: 'btn btn-width1' %>
-                <% end %>
-                </div>
-              </div>
-          </div>
+        <div style="margin-left: 30px">
+          <%= link_to "Add New Addresss", new_address_path, class: "btn btn-width2", remote: true %>
         </div>
-      </div>
       <% end %>
     </div>
   </div>

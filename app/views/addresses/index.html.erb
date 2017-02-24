@@ -35,9 +35,6 @@
       <% end %>
     <% end %>
   </div>
-  <div class="modal fade" id="myModal2" role="dialog">
-    <%= render 'addresses/form_edit' %>
-  </div>
 <% else %>
   <section id="cart_items">
     <div class="container">
@@ -50,14 +47,5 @@
   </section>
 <% end %>
 <div id="new_address" style="margin-left: 30px">
-  <%= button_tag "Add New Addresss", class: "btn btn-width2", "data-toggle" => "modal", "data-target" => "#myModal3" %>
-</div>
-<div class="modal fade" id="myModal3" role="dialog">
-  <div class="modal-dialog" style="width: 400px">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= render 'addresses/form' %>
-      </div>
-    </div>
-  </div>
+  <%= link_to "Add New Addresss", new_address_path, class: "btn btn-width2", remote: true %>
 </div>

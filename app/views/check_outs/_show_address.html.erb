@@ -33,19 +33,7 @@
     <% end %>
   </div>
   <div id="new_address" style="margin-left: 30px">
-    <%= button_tag "Add New Addresss", class: "btn btn-width2", "data-toggle" => "modal", "data-target" => "#myModal" %>
-  </div>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog" style="width: 400px">
-      <div class="modal-content">
-        <div class="modal-body">
-          <%= render 'addresses/form' %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="myModal1" role="dialog">
-    <%= render 'addresses/form_edit' %>
+    <%= link_to "Add New Addresss", new_address_path, class: "btn btn-width2", remote: true %>
   </div>
 </div>
 

@@ -8,6 +8,10 @@ class AddressesController < ApplicationController
     @addresses = current_user.addresses
     @address = Address.new
   end
+
+  def new
+    @address = Address.new
+  end
   
   # GET /addresses/1/edit
   def edit

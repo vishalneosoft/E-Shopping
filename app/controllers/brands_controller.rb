@@ -16,7 +16,7 @@ class BrandsController < ApplicationController
     @brands = Brand.all
     @category = Category.find(params[:category_id])
     @brand = Brand.find(params[:id])
-    @sub_categories = @brand.categories.where('parent_id is not null')
+    @sub_categories = @brand.categories.where('parent_id is not null').order('id ASC')
     @sub_category = if(params[:sub_category])
             @brand.categories.find(params[:sub_category])
           else @sub_categories.present?
